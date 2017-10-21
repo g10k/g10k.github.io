@@ -29,6 +29,34 @@ categories: jekyll update
  
  
  
+ Пример того, что внутри корутины неверно определен внутренние корутины, которые ждут результата предыдущей,
+ 
+ {% highlight python %}
+     async def async_download2():
+        for i, url in enumerate(URLS):
+            async with aiohttp.request('GET', url) as response:
+                print(response)
+ {% endhighlight %}
+ 
+  их нужно оборачивать в такси и передавать на выполнение
+  
+ {% highlight python %}
+    async def async_download_url(url):
+        start = datetime.datetime.now()
+        print('start', start)
+        with aiohttp.ClientSession() as async_session:
+            async with async_session.request("GET", url) as response:
+                # response.close()
+                # print(response)
+                print('end', datetime.datetime.now() - start)
+
+    async def async_download():
+        tasks = [asyncio.tasks.Task(async_download_url(url)) for i, url in enumerate(URLS)]
+        await asyncio.wait(tasks)
+{% endhighlight %}
+
+ 
+ 
 {% highlight ruby %}
 def print_hi(name)
   puts "Hi, #{name}"
