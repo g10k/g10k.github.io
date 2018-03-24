@@ -56,6 +56,14 @@ categories: jekyll update
 {% endhighlight %}
 
  
+ При использовании return_when=FIRST_COMPLETED
+ 
+ возникает warning
+ 
+ Task was destroyed but it is pending!
+ 
+ 
+ 
  
 {% highlight ruby %}
 def print_hi(name)

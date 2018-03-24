@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "Заметки в марте 2018"
+<!--date:   2017-09-04 21:57:21 +0300-->
+categories: development python celery 
+---
+### Массовая обработка запросов (1.5M на создание).
+ 
+ _Кейс_: массовая обработка запросов, приходит почти сразу 1.5млн запросов на создание.
+ 
+  Обрабатывать сразу по приходу внутри вьюхи получается быстро, но каждый для одного слишком много накладных расходов на создание
+  подключение, открытие транзакции притаком количестве это занимает гораздо больше времени.  
+  
+  Возможный вариант решения: ~~группировать эти запросы на стороне отправителя~~
+  1. _нет возможности_ 
+  2. _нет желания перенагружать интерфейс api_
+      
+ 
+ Поэтому, все кладем в очередь. А на этапе обработки делаем группировку.
+ 
+ Воркер обрабатывающий очередь вычитывает и выполняет не 1 таску, а сразу 100.
+ 
+ **Нюансы:**
+ - при параметре prefetch_multiplier=1 накапливаться будет только 1, накапливание работало его тоже нужно изменить, вопрос еще нужно изучать.
+
+Сложность в том, что этот подход выпилили из Celery 3.* и в 4.0 в release_notes написано,
+
+    - celery.contrib.batches has been removed.
+        
+    This was an experimental feature, so not covered by our deprecation timeline guarantee.  
+    You can copy and pase the existing batches code for use within your projects: https://github.com/celery/celery/blob/3.1/celery/contrib/batches.py
+Пример кода http://docs.celeryproject.org/en/3.1/_modules/celery/contrib/batches.html
+
+А конкретно:
+
+    {% highlight python %}
+    # Flush after 100 messages, or 10 seconds.
+    @app.task(base=Batches, flush_every=100, flush_interval=10)
+    def count_click(requests):
+        from collections import Counter
+        count = Counter(request.kwargs['url'] for request in requests)
+        for url, count in count.items():
+            print('>>> Clicks: {0} -> {1}'.format(url, count))
+    {% endhighlight %}
+    
+Сразу этот код не запустится, нужно сделать поправки согласно [рекомендации](https://github.com/celery/celery/issues/3376#issuecomment-272448568)
+
+Кроме того, для запуска в синхронном режиме через вызов без delay, async_apply или с параметром always_eager=True нужно сделать некоторый апгрейд обработки приходящих параметров (поскольку там будут аргументы вызова таски, а не накопленные значения в списке
+
+#### Альтернативные решения:
+Складывать в список redis (может потеряться, нет настроек периодичности если за <Timeout время появилось >tasks) то принудительно не вызывается обработчик
+    
+### Другие заметки, требующие раскрытия
+1. Запись в таблицу с помощью через copy to в postgresql в 2 раза быстрее чем bulk_create начиная от 1000 записей.
+1. База данных Couchdb - Плюсы и минусы, сравнение с mongodb.
+    Хорошая статья [Когда использовать CouchDB над MongoDB и наоборот mongodb](https://code.i-harness.com/ru/q/bdc91e)
+1. Consul, 4 области применения, consul-template для конфигов.
+1. Highload
+    - фронт / бекэнд. uwsgi для чего нужен, медленные клиенты.
+1. Способы тестирования сайта под нагрузкой
+    - ab
+    - yandex-tank
+
+    **Цель**: делать правильное тестирование на нагрузку 
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/

@@ -13,11 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: разработчик g10k (Власов Сергей)
+title: g10k / Сергей Власов
 email: g10k.info@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Личный сайт разработчика g10k (Власов Сергей).
-  Заметки о Python, Django, разработке в целом, ФК Спартак (Москва), dnb, саморазвитие.
+  Заметки о Python, Django, разработке и жизи в целом.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  g10k
