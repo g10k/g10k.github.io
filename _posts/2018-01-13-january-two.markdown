@@ -7,8 +7,9 @@ categories: postgresql achievements-diary django vuejs
 1. <a href='#django'>Django code: core.serializers; core.cache;</a>
 2. <a href='#xor'>Заметки про xor</a>
 
-### <span name='django'>Django code: core.serializers; core.cache;</span>
-Отмечу общий принцип организации кода в base.py описывается базовый класс (частично реализованный, но большинство методов NotImplemented) исключения и некоторые функции
+### <a href="#django" name='django'>Django code: core.serializers; core.cache</a>
+Отмечу общий принцип организации кода в *django/core/serializers/base.py* описывается базовый класс (частично реализованный, но большинство методов NotImplemented) исключения и некоторые функции
+
 django.core.serializers.DjangoJSONEncoder добавляет типы данных (Date, Time, DateTime, timedelta, UUID, Decimal, Promise, CallableBool)
 
 В base.Serializer реализован метод serializer внутри которого start_obj/end_obj. Эти вызовы в цикле оборачивают работу с объектом.
@@ -17,7 +18,7 @@ django.core.serializers.DjangoJSONEncoder добавляет типы данны
 
 `django.utils:` strconv; datastructs (`ImmutableList, MultiDict, OrderedSet`); `cache` (Vary, add_headers, max_cache_time); encoding (`force_bytes, smart_bytes` нужно еще читать);
 
-### <span name='xor'>Заметки про xor</span>
+### <a name='xor'>Заметки про xor</a>
 XOR - шифрование самое простое - побитовое сложение 
 1) Попытался сделать xor для ascii символов в python, получаются не abcdef... Алфавит должен быть только из букв
 
