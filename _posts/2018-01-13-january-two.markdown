@@ -1,5 +1,5 @@
 ---
-layout: serenya_post
+layout: post
 title:  "2019, вторая неделя января"
 categories: postgresql achievements-diary django vuejs
 ---
