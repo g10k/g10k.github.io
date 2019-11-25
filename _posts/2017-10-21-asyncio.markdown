@@ -59,8 +59,7 @@ categories: jekyll update
  При использовании return_when=FIRST_COMPLETED
  
  возникает warning
- 
- Task was destroyed but it is pending!
+Тест ping test на изменение файла и отображение сразу в g10k.github.io
  
  
  
