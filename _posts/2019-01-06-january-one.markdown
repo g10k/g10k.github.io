@@ -11,7 +11,9 @@ categories: postgresql achievements-diary nginx django vuejs
 
 
 ### Массовая обработка запросов (1.5M на создание).
- ### <span name='nginx'>Nginx ivp6, новый ssl-сертификат</span>
+
+### <a href='#nginx'>новый ssl-сертификат pokovru.ru,letsencrypt,ошибка, Nginx ivp6</span>
+Для сайта pokovru не мог собрать сертификат через certbot докер.
 - не собран с ipv6, не собирается certbot, не может проверить авторизацию
 - как я понимаю, nginx не может ответить на запрос ipv6, потому что nginx не поддерживает его [::]:80(443)
 - legality.ru 301 редирект на pokovru.ru. Почему так могло?
@@ -36,23 +38,40 @@ IMPORTANT NOTES:
    client. If you're using the webroot plugin, you should also verify
    that you are serving files from the webroot path you provided.
 ```
-
 проблема должна быть распространенной. решил через reg ru которые прислали сертификат.
 
 ### <a href='#django-salted-hmac' name='django-salted-hmac'>Изучение django</a>
 
-django.utils: encoding.force_bytes, `utils.salted_hmac`, compare_digest: 
-хранится и передается `hash(data):data` для проверки, не было ли заменено содержимое, если будет заменено, хэш изменится.
+**django.utils**: 
+
+Есть базовые функции `force_text` и `force_bytes`. Для каждой из них есть версия **smart**. Которая проверяет, не является ли объект на входе _Promise_ (специальный lazy объект, который не нужно вычислять об этом будет статья дальше `TODO: кросссылка на обзор django.utils.functional.lazy`)
+
+| функция | Py2 | Python3 |
+|-------|--------|---------|
+| `force_text` | unicode | str(unicode py2) |
+| `force_bytes` | str(bytes) | bytes |
+
+Во внутренности не вдаюсь. Пока достаточно понимать.
+
+```
+s = 'hello народ'
+unicode(s) # Падает с исключением 
+force_text(s) # Работает
+```
+
+А _unicode_ нужен, например, чтобы вывести читаемое сообщение в sentry из Exception объекта, а не байтовое представление типа _hello \u043d\u0430\u0440\u043e\u0434_
+
+> TODO: `django.utils.crypto.salted_hmac`, `hmac.compare_digest`: 
  
-**7 января**
-
-`django.utils:` strconv; datastructs (`ImmutableList, MultiDict, OrderedSet`); `cache` (Vary, add_headers, max_cache_time); encoding (`force_bytes, smart_bytes` нужно еще читать);  
-
+ хранится и передается `hash(data):data` для проверки, не было ли заменено содержимое, если будет заменено, хэш изменится.
+ 
+> TODO: `django.utils.strconv`; `django.utils.datastructs` (`ImmutableList`, `MultiDict`, `OrderedSet`)
 
 ### <a href="#vue-js-first-steps" name='vue-js-first-steps'>Первые шаги vue.js</a>
 Хороший [курс](http://js.dmitrylavrik.ru/vue/?utm=site-footer), где Дмитрий Лаврик без академичности и лишней раскачки показывает возможности vue.js
 
 Программа курса:
+
 ```
 урок 1
 Подключение Vue
@@ -137,14 +156,14 @@ Vue при встраивании в многостраничный сайт
  * watch/methods; v-if/v-show; 
  * нужно пользоваться cheatsheet, много полезных фич.
  
-Прошел пока 2 урока
-
+**_Прошел пока 2 урока_**
     
 ### <a href="#jekyll-markdown">Jekyll Markdown</a>
-Начал пользоваться markdown для ведения этого блога.
+Начал пользоваться markdown для ведения этого блога. Непонятно с семействами пока. 
 
-Непонятно с семействами пока. В [jekyll](https://jekyllrb.com/docs/configuration/markdown/) по умолчанию используется [kramdown](https://kramdown.gettalong.org/quickref.html) в проекте [agusmakmun](https://github.com/agusmakmun/agusmakmun.github.io) тоже, но с некоторым добавлением css.
 
-- Надо найти описание этого css.
-- Надо научиться добавлять кастомизированные штуки, например `max-height` окно, с кнопкой `Раскрыть`
+ - [jekyll](https://jekyllrb.com/docs/configuration/markdown/) по умолчанию используется [kramdown](https://kramdown.gettalong.org/quickref.html) 
  
+ - _\[deprecated: больше не пользуюсь\]_ в проекте [agusmakmun](https://github.com/agusmakmun/agusmakmun.github.io) тоже, но с некоторым добавлением css.
+ 
+> TODO: научиться добавлять кастомизацию например `max-height` окно, с кнопкой `Раскрыть` 
