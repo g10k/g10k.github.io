@@ -39,7 +39,7 @@ IMPORTANT NOTES:
 
 ### <a href='#django-salted-hmac' name='django-salted-hmac'>Изучение django</a>
 
-**django.utils**: 
+**django.utils.encoding**: 
 
 Есть базовые функции `force_text` и `force_bytes`. Для каждой из них есть версия **smart**. Которая проверяет, не является ли объект на входе _Promise_ (специальный lazy объект, который не нужно вычислять об этом будет статья дальше `TODO: кросссылка на обзор django.utils.functional.lazy`)
 
