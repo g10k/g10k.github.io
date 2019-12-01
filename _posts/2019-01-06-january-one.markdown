@@ -5,14 +5,11 @@ title:  "2019, первая неделя января"
 categories: postgresql achievements-diary nginx django vuejs
 ---
 1. <a href='#nginx'>Nginx ivp6, новый ssl-сертификат</a>
-2. <a href='#django-salted-hmac'>Изучение django</a>
-3. <a href='#vue-js-first-steps'>Первые 2 урока Vue.js</a>
-4. <a href='#jekyll-markdown'>Jekyll и agusmakmuun шаблон</a>
+1. <a href='#django-salted-hmac'>Изучение django</a>
+1. <a href='#vue-js-first-steps'>Первые 2 урока Vue.js</a>
+1. <a href='#jekyll-markdown'>Jekyll и agusmakmuun шаблон</a>
 
-
-### Массовая обработка запросов (1.5M на создание).
-
-### <a href='#nginx'>новый ssl-сертификат pokovru.ru,letsencrypt,ошибка, Nginx ivp6</span>
+### <a href='#nginx'>новый ssl-сертификат pokovru.ru,letsencrypt,ошибка, Nginx ivp6</a>
 Для сайта pokovru не мог собрать сертификат через certbot докер.
 - не собран с ipv6, не собирается certbot, не может проверить авторизацию
 - как я понимаю, nginx не может ответить на запрос ipv6, потому что nginx не поддерживает его [::]:80(443)
