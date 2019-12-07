@@ -17,8 +17,10 @@ categories: postgresql achievements-diary nginx django vuejs
 В модуле есть базовые функции `force_text` и `force_bytes`. Для каждой из них есть версия **smart**. Которая проверяет, не является ли объект на входе _Promise_ (специальный lazy объект, который не нужно вычислять об этом будет статья дальше)
 
 > TODO: кросссылка на обзор django.utils.functional.lazy
+Эти функции самый простой способ сделать код преобразования к строке совместимым python2/3. Но в них есть **_overhead_** на внутренние проверки. 
 
-| функция | Py2 | Python3 |
+
+| функция | return:Python2 | return:Python3 |
 |-------|--------|---------|
 | `force_text` | unicode | str(unicode py2) |
 | `force_bytes` | str(bytes) | bytes |
