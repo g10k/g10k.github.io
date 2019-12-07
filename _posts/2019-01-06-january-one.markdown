@@ -4,8 +4,8 @@ title:  "2019, первая неделя января"
 <!--date:   2018-01-01 21:57:21 +0300-->
 categories: postgresql achievements-diary nginx django vuejs
 ---
-1. <a href='#nginx'>Nginx ivp6, новый ssl-сертификат</a>
 1. <a href='#django-salted-hmac'>Изучение django</a>
+1. <a href='#nginx'>Nginx ivp6, новый ssl-сертификат</a>
 1. <a href='#vue-js-first-steps'>Первые 2 урока Vue.js</a>
 1. <a href='#jekyll-markdown'>Jekyll и agusmakmuun шаблон</a>
 
@@ -14,7 +14,9 @@ categories: postgresql achievements-diary nginx django vuejs
 
 **django.utils.encoding**: 
 
-В модуле есть базовые функции `force_text` и `force_bytes`. Для каждой из них есть версия **smart**. Которая проверяет, не является ли объект на входе _Promise_ (специальный lazy объект, который не нужно вычислять об этом будет статья дальше `TODO: кросссылка на обзор django.utils.functional.lazy`)
+В модуле есть базовые функции `force_text` и `force_bytes`. Для каждой из них есть версия **smart**. Которая проверяет, не является ли объект на входе _Promise_ (специальный lazy объект, который не нужно вычислять об этом будет статья дальше)
+
+> TODO: кросссылка на обзор django.utils.functional.lazy
 
 | функция | Py2 | Python3 |
 |-------|--------|---------|
@@ -23,7 +25,7 @@ categories: postgresql achievements-diary nginx django vuejs
 
 Во внутренности не вдаюсь. Пока достаточно понимать.
 
-```
+```python
 s = 'hello народ'
 unicode(s) # Падает с исключением 
 force_text(s) # Работает
