@@ -11,8 +11,48 @@ categories: django encryption
 А как насчет передачи данных между сервисами api и т.д.? Задался я таким вопросом.
  
 Для себя я выделил несколько вопросов и объекдинил их в две крупные цели использовани кодирования и шифрования
-1. Кодирование нужно чтобы передать байтовую информацию в общем виде, который.
-1. передать информацию в открытом json или закодированном виде и удостовериться, что она от того лица на которое мы рассчитываем(не было man in the midle)
+
+1. Кодирование нужно чтобы передать байтовую информацию в закодированном виде.
+
+В django. есть модуль django.utils.baseconv который преобразует число в base64, base32 и до base2.
+При этом base64 работает алфавит не такой же как в base64.encode() '-_' vs '+/' 
+
+```python
+
+import base64
+
+data = {
+    'last_name': 'Vlasov',
+    'first_name': 'Sergey',
+    'age': '28',
+    'address': {
+        'city': 'Серпухов',
+        'street': 'Дзержинского'
+    }
+}
+
+len(json.dumps(data)) # 219 # преобразует в кодировку 'unicode_escape'
+
+# Получим unicode
+u_json = json.dumps(data).decode('unicode_escape') 
+len(u_json) # 119
+
+# Получим bytes (string 2.7)
+str_json = json.dumps(data).decode('unicode_escape').encode('utf-8')
+len(str_json) # 139
+
+# в кодировке с алфавитом 64 включает в себя 26+26 + 10 и два символа '+/'
+# при этом кодирование чисел через django.utils.baseconv.base64 использует символы '-_'
+base64.b64encode(str_json) 
+'eyJmaXJzdF9uYW1lIjogIlNlcmdleSIsICJsYXN0X25hbWUiOiAiVmxhc292IiwgImFnZSI6ICIyOCIsICJhZGRyZXNzIjogeyJjaXR5IjogItCh0LXRgNC/0YPRhdC+0LIiLCAic3RyZWV0IjogItCU0LfQtdGA0LbQuNC90YHQutC+0LPQviJ9fQ=='
+len(base64.b64encode(str_json)) # 188
+
+# Вкодировке b32 размер больше.
+len(base64.b64encode(str_json)) # 224
+```
+
+1. передать информацию в открытом json или закодированном виде и удостовериться, что она от того лица на которое мы рассчитываем(не было man in the middle)
+
 1. передать информацию в зашифрованном виде, чтобы не было возможности её раскрыть
     1. Шифрование с публичным ключом
     
@@ -20,4 +60,9 @@ categories: django encryption
 
 ###  <a name='xpath-examples'>Возможности XPath</a>
 Использование в браузере $x("//")
-На примере errors xml из 1c 
+На примере errors xml из 1c
+ 
+ 
+1. <a href='#update-via-tmp-table'>Обновление массива пар данных в таблице</a>
+
+###  <a name='xpath-examples'>Обновление массива пар данных в таблице</a> 
