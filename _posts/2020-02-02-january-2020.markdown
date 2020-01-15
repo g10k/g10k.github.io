@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Январь 2020"
+categories: django encryption
+---
+
+1. Проект на daphne с вебсокетами. соображения по нему.
+
+1. <a href='#how-to-encode-and-crypt-data'>Мелочи</a>
+- Запросы к json полям, group by когда делаешь max
+- postgres
+
