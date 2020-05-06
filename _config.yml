@@ -25,6 +25,7 @@ github_username:  g10k
 # Build settings
 markdown: kramdown
 theme: minima
+show_excerpts: true
 #plugins:
 #  - jekyll-feed
 
