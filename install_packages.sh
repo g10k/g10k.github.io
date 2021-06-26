@@ -95,6 +95,9 @@ chmod +x ~/.local/share/applications/Postman
 # создать ярлык
 # sudo apt install -y ./skypeforlinux-64.deb
 
+TODO:
+Ссылки на яндекс.диск и mail облако в файловом менеджере 
+яндекс-диск утилита
 
 # Вручную
 # echo "Вручную: 
