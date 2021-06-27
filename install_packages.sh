@@ -95,6 +95,9 @@ chmod +x ~/.local/share/applications/Postman
 # создать ярлык
 # sudo apt install -y ./skypeforlinux-64.deb
 
+touch ~/.bash_aliases
+echo 'alias sl_vpn="cd ~/dev/vpn/sl/; sudo openvpn sunlight.ovpn"' >> ~/.bash_aliases
+
 TODO:
 Ссылки на яндекс.диск и mail облако в файловом менеджере 
 - yandex-disk
@@ -110,3 +113,5 @@ TODO:
 # - горячие клавиши для flameshot; "
 # - добавить shortcut copy/paste в terminator
 # - ctrl+shift+t - вызов terminator
+
+# скопировать сертификаты ovpn, сдела
