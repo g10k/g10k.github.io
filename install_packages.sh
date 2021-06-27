@@ -97,14 +97,15 @@ chmod +x ~/.local/share/applications/Postman
 
 TODO:
 Ссылки на яндекс.диск и mail облако в файловом менеджере 
-яндекс-диск утилита
-
+- yandex-disk
 - vlc
 - горячии клавиши для звука +/-
-- клавиши стрелок: 5- вниз, 9 - end; 1 - PageUp
 
-# Вручную
-# echo "Вручную: 
+
+# Keyboard -> дополнительно: 
+ - переключение раскладок alt+shift;
+ - `setxkbmap -option 'numpad:microsoft'` - клавиши стрелок: 5- вниз, 9 - end; 1 - PageUp
+    аналог setxmap как описано в https://askubuntu.com/questions/44921/how-to-change-shift-keypad-key-behavior 
 # - Добавить апплет multi-core-system-monitor;"
 # - горячие клавиши для flameshot; "
 # - добавить shortcut copy/paste в terminator
